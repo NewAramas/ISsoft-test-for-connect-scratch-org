@@ -1,0 +1,8 @@
+<!--
+ - Created by mryzhkouskaya on 22.07.2019.
+ -->
+
+<aura:event type="COMPONENT" description="Ex2ToEx5selectPicklistEvent">
+
+    <aura:attribute name="objWithSelectedValues" type="Object"/>
+</aura:event>

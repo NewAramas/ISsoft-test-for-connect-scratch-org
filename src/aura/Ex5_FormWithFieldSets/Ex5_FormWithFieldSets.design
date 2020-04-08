@@ -1,0 +1,10 @@
+<!--
+ - Created by mryzhkouskaya on 28.08.2019.
+ -->
+
+<design:component>
+    <design:attribute name = "ObjectNameForApp" label="Object Name"/>
+    <design:attribute name = "FieldNameForApp" label="Field Name"/>
+    <design:attribute name = "FieldSetNameForApp" label="FieldSet Name"/>
+    <design:attribute name = "PositionForApp" label="Position" datasource = "1 column, 2 columns"/>
+</design:component>

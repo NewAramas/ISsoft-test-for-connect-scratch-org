@@ -1,0 +1,7 @@
+<!--
+ - Created by mryzhkouskaya on 10.06.2019.
+ -->
+
+<aura:event type="COMPONENT" description="EventSelectedFields">
+    <aura:attribute name="attributeSelectedFields" type="Object"/>
+</aura:event>

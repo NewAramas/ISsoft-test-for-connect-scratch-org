@@ -1,0 +1,46 @@
+<!--
+ - Created by mryzhkouskaya on 16.11.2019.
+ -->
+
+<aura:component description="Test5_Lightning_in_VF" access="global">
+
+    <!--only test attributes to VF-->
+    <aura:attribute name="greeting" type="String" default="Hello" access="global" />
+    <aura:attribute name="subject" type="String" default="World77777" access="global" />
+    <div >
+        <span class="greeting" >{!v.greeting}</span>, {!v.subject}!999
+    </div>
+    <br/>
+    <br/>
+
+    <!--child component with event-->
+    <aura:attribute name="messageFromEvent" type="String"/>
+    <aura:attribute name="numEvents" type="Integer" default="0"/>
+
+    <aura:handler  event="c:Test5_Application_Event" action="{!c.handleComponentEvent}"/>
+
+    <!--<c:Test5_Lightning_in_VF_With_Event />-->
+
+    <p>{!v.messageFromEvent}</p>
+    <p>Number of events: {!v.numEvents}</p>
+
+    <br/>
+    <br/>
+
+    <!--cmp with change attributes-->
+
+    <c:Test5_Lightning_in_VF_With_Attributes
+            messageFromEvent="{!v.messageFromEvent}"
+    />
+
+    <br/>
+    <br/>
+
+    <!--cmp with methods-->
+    <aura:attribute name="parentAttribute1" type="String" default="message from method "/>
+
+    <c:Test5_Lightning_In_VF_With_Method aura:id="child"/>
+    <!--<lightning:button label="Call child method" onclick="{! c.onCallChildMethod }" />-->
+
+
+</aura:component>

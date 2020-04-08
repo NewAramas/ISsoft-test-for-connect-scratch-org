@@ -1,0 +1,144 @@
+<!--
+ - Created by mryzhkouskaya on 22.05.2019.
+ -->
+
+<aura:component description="TableWithSelectedFields" controller="GetDataOffObjectsController">
+
+    <aura:method name="transferRecordsAndFieldsMethod" action="{!c.setRecordsAndFieldsIntoTable}" description="">
+        <aura:attribute name="arrtRecords" type="list" default=""/>
+        <aura:attribute name="attrFields" type="list" default=""/>
+        <aura:attribute name="attrObjectName" type="String" default=""/>
+        <aura:attribute name="attrFieldNamesForSelect" type="String" default=""/>
+    </aura:method>
+
+    <aura:attribute name="tableRecords" type="List"/>
+    <aura:attribute name="fieldSetValues" type="List"/>
+    <aura:attribute name="objectName" type="String"/>
+    <aura:attribute name="fieldNamesForSelect" type="String"/>
+    <aura:attribute name="recordId" type="id"/>
+
+    <aura:attribute name="showTable" type="Boolean"/>
+    <aura:attribute name="showHideModal" type="boolean"/>
+
+    <aura:attribute name="showEditWindow" type="boolean"/>
+    <aura:attribute name="showViewWindow" type="boolean"/>
+    <aura:attribute name="showCreateWindow" type="boolean"/>
+
+
+    <aura:handler event="force:showToast" action="{!c.updateEditRecords}"/>
+
+    <aura:if isTrue="{!v.showTable}">
+
+        <lightning:layoutItem flexibility="auto" padding="around-small">
+            <div class="custom-box">
+                <lightning:button label="Create new record"
+                                  iconName="utility:record_create"
+                                  variant="brand"
+                                  onclick="{!c.createNewRecord}"/>
+                <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                    <thead>
+                    <tr class="slds-text-title_caps">
+                        <th scope="col">
+
+                        </th>
+                        <aura:iteration items="{!v.fieldSetValues}" var="field" indexVar="count1">
+                            <th scope="col">
+                                <c:LightningCell_Header
+                                        rowData ="{!v.tableRecords}"
+                                        colLabel = "{!field.APILabel}"
+                                        colName = "{!field.APIName}"
+                                />
+                            </th>
+                        </aura:iteration>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <aura:iteration items="{!v.tableRecords}" var="row">
+                        <tr>
+                            <td>
+                                <button class="slds-button"
+                                        onclick="{!c.editRecord}"
+                                        id="{!row.Id}"
+                                        title="Edit record">
+                                    <lightning:icon iconName="utility:edit" size="small" alternativeText="" />
+                                </button>&nbsp;&nbsp;
+
+                                <a target="_blank" href="{!'/'+row.Id}" style="text-decoration:none;">
+                                    <lightning:icon iconName="utility:summary" size="small" alternativeText=""/>
+                                </a>&nbsp;&nbsp;
+
+                                <button class="slds-button"
+                                        onclick="{!c.deleteRecordById}"
+                                        id="{!row.Id}"
+                                        title="Delete record">
+                                    <lightning:icon iconName="utility:delete" size="small" alternativeText="" />
+                                </button>&nbsp;&nbsp;
+                                <button class="slds-button"
+                                        onclick="{!c.view}"
+                                        id="{!row.Id}"
+                                        title="View record">
+                                    <lightning:icon iconName="utility:preview" size="small" alternativeText="" />
+                                </button>
+                            </td>
+                            <aura:iteration items="{!v.fieldSetValues}" var="field">
+                                <td>
+                                    <c:LightningCell
+                                            record="{!row}"
+                                            field="{!field}"/>
+                                </td>
+                            </aura:iteration>
+
+                        </tr>
+                    </aura:iteration>
+
+                    </tbody>
+                </table>
+            </div>
+        </lightning:layoutItem>
+    </aura:if>
+
+    <aura:if isTrue="{!v.showHideModal}">
+
+        <section role="dialog" tabindex="-1"
+                 aria-labelledby="modal-heading-01"  aria-modal="true" aria-describedby="modal-content-id-1"
+                 class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+
+                <header class="slds-modal__header">
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">About {!v.objectName}</h2>
+                </header>
+
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <aura:if isTrue="{!v.showEditWindow}">
+
+                        <lightning:recordForm
+                                recordId="{!v.recordId}"
+                                objectApiName="{!v.objectName}"
+                                layoutType="Full"
+                                columns="2"
+                                mode="edit"
+                                onsuccess="{!c.updateEditRecords}"/>
+                    </aura:if>
+                    <aura:if isTrue="{!v.showViewWindow}">
+                        <force:recordView aura:id="view" recordId="{!v.recordId}"/>
+                    </aura:if>
+                    <aura:if isTrue="{!v.showCreateWindow}">
+                        <lightning:recordForm objectApiName="{!v.objectName}"
+                                              layoutType="Full"
+                                              columns="2"
+                                              onsuccess="{!c.updateEditRecords}"/>
+                    </aura:if>
+                </div>
+
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral"
+                                      label="Close"
+                                      title="Cancel"
+                                      onclick="{! c.closeModel }"/>
+                </footer>
+            </div>
+        </section>
+
+    </aura:if>
+
+</aura:component>

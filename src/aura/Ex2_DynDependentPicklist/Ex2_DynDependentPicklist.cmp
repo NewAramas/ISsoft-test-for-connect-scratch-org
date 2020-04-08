@@ -1,0 +1,33 @@
+<!--
+ - Created by mryzhkouskaya on 30.07.2019.
+ -->
+
+<aura:component description="Ex2_DynDependentPicklist" controller = "Ex2_D_Controller"
+    implements = 'forceCommunity:availableForAllPageTypes'>
+    
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+
+    <aura:attribute name="fieldsdWithDependency" type="List"/>
+    <aura:attribute name="inputDesc_Ex2" type="List" default="[]"/>
+    <aura:attribute name="arraySelectedValue" type="List" default="[]"/>
+    <aura:attribute name="arrayOfOrderOfDependentPicklists" type="List" default="[]"/>
+
+    <aura:method name="checkValidationOnRequiredFields" action="{!c.checkValidDepPicklists}"/>
+    <aura:method name="removeSelectedData" action="{!c.removeSelectedData}"/>
+    <aura:registerEvent name="ex2ToEx5SelectedValuesEvent" type="c:Ex2ToEx5selectPicklistEvent"/>
+    
+
+    <aura:attribute name="theForm" type="Aura.Component[]"/>
+    <form class="slds-form--stacked">
+        <aura:iteration items="{!v.theForm}" var="facet">
+                {!facet}
+        </aura:iteration>
+    </form>
+
+    <aura:attribute name="showSpinner" type="boolean"/>
+    <aura:if isTrue="{!v.showSpinner}">
+        <lightning:spinner aura:id="Spinner" alternativeText="Loading" size="medium" variant="brand" class="slds-hide"/>
+    </aura:if>
+
+</aura:component>

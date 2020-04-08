@@ -1,0 +1,23 @@
+<!--
+ - Created by mryzhkouskaya on 17.07.2019.
+ -->
+
+<aura:component description = "Ex2_DynamicDependentPicklist" controller = "Ex2_D_Controller">
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:attribute name="childAttrListControllerToDependentField" type="String" default=""/>
+    <aura:attribute name="objectNamesToRangeOfHouseNumbers" type="Object"/>
+    <aura:attribute name="picklistValues" type="List"/>
+    <aura:attribute name="options" type="List"/>
+    <aura:attribute name="inputDesc" type="Array"/>
+    <aura:attribute name="selectedValue" type="String" default=""/>
+    <aura:attribute name="currentDependencies" type="Integer" default="-1"/>
+    <aura:attribute name="arrayOfObjectFieldDependencies" type="Array"/>
+
+    <aura:attribute name="theForm" type="Aura.Component[]"/>
+    <form class="slds-form--stacked">
+        <aura:iteration items="{!v.theForm}" var="facet">
+                {!facet}
+        </aura:iteration>
+    </form>
+</aura:component>

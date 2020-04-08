@@ -1,0 +1,115 @@
+<!--
+ - Created by mryzhkouskaya on 21.06.2019.
+ -->
+
+<aura:component description="Ex4_MultiSelectLookupCmp" controller="Ex4_MultiSelectLookupCtrl"
+                implements = 'forceCommunity:availableForAllPageTypes'>
+
+    <!--declare attributes-->
+    <aura:attribute name="lstSelectedRecords" type="sObject[]" default="[]" description="Use,for store SELECTED sObject Records"/>
+    <aura:attribute name="listOfSearchRecords" type="List" description="Use,for store the list of search records which returns from apex class"/>
+    <aura:attribute name="SearchKeyWord" type="string"/>
+    <aura:attribute name="objectAPIName" type="string" default=""/>
+    <aura:attribute name="IconName" type="string" default=""/>
+    <aura:attribute name="label" type="string" default=""/>
+
+    <aura:attribute name="showCreateWindow" type="Boolean" default=""/>
+    <!--declare events handlers-->
+    <aura:handler name="oSelectedRecordEvent" event="c:Ex4_selectedsObjectRecordsEvent" action="{!c.handleComponentEvent}"/>
+    <aura:attribute name="Message" type="String" default=""/>
+
+    <aura:attribute name="childAttribute" type="Contact" default="{ 'sobjectType': 'Contact' , 'LastName': '***'}"/>
+
+    <!-- https://www.lightningdesignsystem.com/components/lookups/ -->
+
+    <div onmouseleave="{!c.onblur}" aura:id="searchRes" class="slds-form-element slds-lookup slds-is-close">
+        <label class="slds-form-element__label">{!v.label}</label>
+        <!--This part is for display search bar for lookup-->
+        <div class="slds-form-element__control">
+            <div class="slds-input-has-icon slds-input-has-icon--right">
+
+                <!-- This markup is for when an record is selected -->
+                <div aura:id="lookup-pill" class="slds-pill-container">
+                    <div aura:id="lookupField" class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right">
+
+                        <ui:inputText click="{!c.onfocus}"
+                                      updateOn="keyup"
+                                      keyup="{!c.keyPressController}"
+                                      class="slds-lookup__search-input slds-input inputSize"
+                                      value="{!v.SearchKeyWord}"
+                                      placeholder="search.."/>
+                        <!--/////lupa/////-->
+                        <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right ">
+                            <lightning:icon iconName="utility:search" size="x-small" alternativeText="icon"/>
+                        </span>
+
+                    <!--////// //////pop up with create new record//////////////-->
+                        <aura:if isTrue="{!v.showCreateWindow}">
+                            <section role="dialog" tabindex="-1"
+                                     aria-labelledby="modal-heading-01" aria-modal="true"
+                                     aria-describedby="modal-content-id-1"
+                                     class="slds-modal slds-fade-in-open">
+                                <div class="slds-modal__container">
+
+                                    <header class="slds-modal__header">
+                                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Create
+                                            New Account{!v.objectName}</h2>
+                                    </header>
+                                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                        <lightning:recordForm objectApiName="Account"
+                                                              layoutType="Full"
+                                                              columns="2"
+                                                              />
+                                    </div>
+                                    <footer class="slds-modal__footer">
+                                        <lightning:button variant="neutral"
+                                                          label="Close"
+                                                          title="Cancel"
+                                                          onclick="{! c.closeModel }"/>
+                                    </footer>
+                                </div>
+                            </section>
+
+                        </aura:if>
+                    </div>
+
+                    <!--Selected Records Pills Section-->
+                    <aura:iteration items="{!v.lstSelectedRecords}" var="sr">
+
+                        <lightning:pill class="slds-m-around_xx-small" label="{!sr.Name}" name="{!sr.Id}" onremove="{!c.clear }">
+
+                            <aura:set attribute="media">
+
+                                <lightning:icon iconName="{!v.IconName}" size="x-small" alternativeText="icon"/>
+                            </aura:set>
+
+                        </lightning:pill>
+                    </aura:iteration>
+
+                    <aura:if isTrue="{!v.lstSelectedRecords.length>0}">
+                        <label>Selected {!v.lstSelectedRecords.length} records</label>
+                    </aura:if>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--This part is for Display typehead lookup result List-->
+        <ul style="min-height:40px;margin-top:0px !important" class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid slds-lookup__menu slds" role="listbox">
+            <lightning:spinner class="slds-hide" variant="brand" size="small" aura:id="mySpinner"/>
+
+            <lightning:button label="Create new record"
+                              iconName="utility:record_create"
+                              onclick="{!c.createNewRecord}"/>
+
+            <aura:iteration items="{!v.listOfSearchRecords}" var="singleRec">
+                <!--Child Component-->
+                <c:Ex4_MultiSelectLookupResult oRecord="{!singleRec}" IconName="{!v.IconName}"/>
+
+            </aura:iteration>
+
+        </ul>
+    </div>
+</aura:component>

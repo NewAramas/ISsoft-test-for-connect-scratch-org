@@ -1,0 +1,61 @@
+<!--
+ - Created by mryzhkouskaya on 14.06.2019.
+ -->
+
+<aura:component description="Ex2_D" controller="Ex2_D_Controller">
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    <aura:attribute name="picklistValuesOfStreetNames" type="List"/>
+    <aura:attribute name="objectNamesToRangeOfHouseNumbers" type="Object"/>
+
+    <aura:attribute name="selectedStreetName" type="String"/>
+
+    <aura:attribute name="selectedRangeOfHouseNumbers" type="String"/>
+    <aura:attribute name="picklistValuesOfRange" type="List"/>
+    <aura:attribute name="showSecondPicklist" type="boolean"/>
+
+    <aura:handler name="change" value="{!v.selectedRangeOfHouseNumbers}" action="{!c.getSecondDependentOfPicklist}"/>
+    <aura:attribute name="objectRangeOfHouseNumbersToNumbers" type="Object"/>
+    <aura:attribute name="showThirdPicklist" type="boolean"/>
+
+    <aura:attribute name="picklistValuesOfNumbers" type="List"/>
+    <aura:attribute name="selectedHouseNumbers" type="String"/>
+
+    <!--<aura:attribute name="childAttribute" type="Contact" default="{ 'sobjectType': 'Contact' , 'LastName': '***'}"/>-->
+    <aura:attribute name="childAttrArrayFieldDependencies" type="String" default=""/>
+    <aura:attribute name="arrayFieldDependencies" type="List" default='[]'/>
+    <aura:attribute name="objectSelectedValues" type="Object" />
+
+
+    <!--<div style="padding-left: 110px;">-->
+        <!--<div class="slds-form slds-form_horizontal slds-p-around_medium  slds-size_1-of-2">-->
+            <lightning:select name="picklistValues" label="Select street" aura:id="picklistValuesOfStreetNames"
+                              value="{!v.selectedStreetName}" onchange="{!c.fireSecondPickList}">
+                <option value="">Choose one...</option>
+                <aura:iteration var="item" items="{!v.picklistValuesOfStreetNames}">
+                    <option>{!item}</option>
+                </aura:iteration>
+            </lightning:select>
+            <aura:if isTrue="{!v.showSecondPicklist}">
+                <lightning:select name="picklistValues" label="Select range of number house"
+                                  aura:id="picklistValuesOfRange"
+                                  value="{!v.selectedRangeOfHouseNumbers}" onchange="{!c.fireThirdPickList}">
+                    <option value="">Choose one...</option>
+                    <aura:iteration var="item" items="{!v.picklistValuesOfRange}">
+                        <option>{!item}</option>
+                    </aura:iteration>
+                </lightning:select>
+            </aura:if>
+            <aura:if isTrue="{!v.showThirdPicklist}">
+                <lightning:select name="picklistValues" label="Select a number house" aura:id="picklistValuesOfNumbers"
+                                  value="{!v.selectedHouseNumbers}" onchange="{!c.fireEventToMainCmp}">
+                    <option value="">Choose one...</option>
+                    <aura:iteration var="item" items="{!v.picklistValuesOfNumbers}">
+                        <option>{!item}</option>
+                    </aura:iteration>
+                </lightning:select>
+            </aura:if>
+        <!--</div>-->
+    <!--</div>-->
+
+</aura:component>

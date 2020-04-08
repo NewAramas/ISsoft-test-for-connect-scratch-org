@@ -1,0 +1,9 @@
+<!--
+ - Created by mryzhkouskaya on 13.03.2020.
+ -->
+
+<aura:component description="test_for_test_attr_child2">
+    <aura:attribute name="subject" type="String"/>
+    <div>bar: {!v.subject}</div>
+    <ui:button press="{!c.changeSubject}" label="Change the Subject"/>
+</aura:component>

@@ -1,0 +1,23 @@
+<!--
+ - Created by mryzhkouskaya on 10.06.2019.
+ -->
+
+<apex:page id="VFPageWithLightningComponent">
+    <script src="https://myDomain.my.salesforce.com/lightning/lightning.out.js"></script>
+
+    <apex:includeLightning />
+
+    <div id="lightningComp"/>
+
+    <script>
+        $Lightning.use("c:ChoiceObjectApp", function() {
+            $Lightning.createComponent("c:MainCmpForTask",{
+                displayText:"nnnnn"
+            },
+                "lightningComp",
+                function(cmp) {
+                }
+            );
+        });
+    </script>
+</apex:page>

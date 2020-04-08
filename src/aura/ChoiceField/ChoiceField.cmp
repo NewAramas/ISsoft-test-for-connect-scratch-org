@@ -1,0 +1,32 @@
+<!--
+ - Created by mryzhkouskaya on 20.05.2019.
+ -->
+
+<aura:component description="ChoiceField" controller="GetDataOffObjectsController">
+
+    <aura:registerEvent name="cmpChoiceFieldEvent" type="c:EventSelectedFields"/>
+
+    <aura:method name="getFieldNamesFromMainCmp" action="{!c.setFieldsIntoListBox}" description="">
+        <aura:attribute name="attrSelectedFields" type="Object" default="parameter 1"/>
+    </aura:method>
+
+    <aura:attribute name="availableFieldNames" type="List" default="[]" description=" Picklist field names"/>
+    <aura:attribute name="selectedFieldNames" type="List" default="[]" description="Selected field names"/>
+
+
+    <lightning:dualListbox aura:id="selectField"
+                           name="Fields"
+                           label="Select Field"
+                           sourceLabel="Available Fields"
+                           selectedLabel="Selected Fields"
+                           options="{!v.availableFieldNames }"
+                           value="{!v.selectedFieldNames}"
+
+    />
+    <br/>
+    <lightning:button variant="brand"
+                      label="Create a table with selected fields"
+                      onclick="{!c.fireCmpChoiceFieldEvent}"/>
+
+
+</aura:component>

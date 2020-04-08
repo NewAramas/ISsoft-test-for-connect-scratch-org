@@ -1,0 +1,13 @@
+<!--
+ - Created by mryzhkouskaya on 16.11.2019.
+ -->
+
+<aura:component description="Test5_Lightning_in_VF_With_Event">
+    <aura:registerEvent name="appEvent" type="c:Test5_Application_Event"/>
+
+    <h1>I am Lightning component</h1>
+    <p><lightning:button
+            label="Click here to fire a component event"
+            onclick="{!c.fireComponentEvent}" />
+    </p>
+</aura:component>

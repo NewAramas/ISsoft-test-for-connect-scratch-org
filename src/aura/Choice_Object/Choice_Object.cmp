@@ -1,0 +1,26 @@
+<!--
+ - Created by mryzhkouskaya on 17.05.2019.
+ -->
+
+<aura:component description="Choice_Object" controller="GetDataOffObjectsController">
+
+
+    <aura:attribute name="picklistValuesOfObjectNames" type="List"/>
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+
+
+    <aura:registerEvent name="cmpEvent" type="c:EventSelectedObject"/>
+
+    <aura:attribute name="selectedObjectValue" type="String"/>
+    <aura:handler name="change" value="{!v.selectedObjectValue}" action="{!c.fireComponentEvent}"/>
+
+
+    <lightning:select name="picklistValues" label="Select an object" aura:id="picklistValuesOfObjectNames"
+                      value="{!v.selectedObjectValue}">
+        <option value="">None</option>
+        <aura:iteration var="item" items="{!v.picklistValuesOfObjectNames}">
+            <option value="{!item.APIName}">{!item.APILabel}</option>
+        </aura:iteration>
+    </lightning:select>
+   
+</aura:component>

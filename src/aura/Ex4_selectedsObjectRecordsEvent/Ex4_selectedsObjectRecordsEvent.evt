@@ -1,0 +1,7 @@
+<!--
+ - Created by mryzhkouskaya on 21.06.2019.
+ -->
+
+<aura:event type="COMPONENT" description="Ex4_selectedsObjectRecordsEvent">
+    <aura:attribute name="recordByEvent" type="sObject"/>
+</aura:event>

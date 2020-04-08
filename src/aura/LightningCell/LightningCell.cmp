@@ -1,0 +1,14 @@
+<!--
+ - Created by mryzhkouskaya on 24.05.2019.
+ -->
+
+<aura:component description="LightningCell">
+    <aura:attribute name="record" type="sObject" description="record"/>
+    <aura:attribute name="field" type="Object" description="field object"/>
+    <aura:attribute name="cellValue" type="Object"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <ui:outputText value="{!v.cellValue}"/>
+
+</aura:component>

@@ -1,0 +1,23 @@
+<!--
+ - Created by mryzhkouskaya on 16.11.2019.
+ -->
+
+<apex:page id="Test4_Vf_in_Lightning" controller="Test4_for_VFpage_Controller" lightningStylesheets="true">
+
+    <apex:outputText value="value from LC"/>
+
+    <script>
+        var lexOrigin = "https://aramas-dev-ed.lightning.force.com";
+        window.addEventListener("message", function(event) {
+            alert(event);
+            if (event.origin !== lexOrigin) {
+                // Not the expected origin: reject message!
+                return;
+            }
+            // Handle message
+            console.log(event.data);
+
+        }, false);
+    </script>
+
+</apex:page>

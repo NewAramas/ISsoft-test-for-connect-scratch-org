@@ -1,0 +1,7 @@
+<!--
+ - Created by mryzhkouskaya on 18.10.2019.
+ -->
+
+<aura:event type="COMPONENT" description="Ex5_Main_To_FormWithCreation_Event">
+    <!--<aura:attribute name="objectName" type="String"/>-->
+</aura:event>

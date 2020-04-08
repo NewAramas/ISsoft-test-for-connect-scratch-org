@@ -1,0 +1,39 @@
+<!--
+ - Created by mryzhkouskaya on 15.11.2019.
+ -->
+
+<apex:page id="Test3_VF_in_Lightning" controller="Test4_for_VFpage_Controller" >
+    <html lang="aa">
+    <head>
+        <title>page for redirection </title>
+
+    </head>
+    <body>
+    <!--<apex:variable var="myParam" value="{!myParameter1}" />-->
+
+    <div>*****************************</div>
+        <div>I am another visualforce page</div>
+        <div>I am another visualforce page</div>
+        <div>I am another visualforce page</div>
+        <div>I am another visualforce page</div>
+        <div>I am another visualforce page</div>
+        <div>*****************************</div>
+    {!inputText}
+
+    <!--<apex:outputText value="{!RecordToDelete}"/>-->
+    <!--<apex:outputText value="{!personID}"/>-->
+
+    <!--<div> Parametr from visualforce page</div>-->
+        <!--<div> {!myParam}</div>-->
+
+    <apex:variable value="{!1}" var="rowNum"/>
+    <apex:repeat value="{!collection}" var="row">
+    {!row}<br/>
+    <!--{!rowNum}-{!row}<br/>-->
+        <apex:variable var="rowNum" value="{!rowNum + 1}"/>
+    </apex:repeat>
+
+
+    </body>
+    </html>
+</apex:page>

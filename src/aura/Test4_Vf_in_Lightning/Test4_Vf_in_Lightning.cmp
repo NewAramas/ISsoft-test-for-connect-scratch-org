@@ -1,0 +1,19 @@
+<!--
+ - Created by mryzhkouskaya on 16.11.2019.
+ -->
+
+<aura:component description="Test4_Vf_in_Lightning"
+                implements="flexipage:availableForAllPageTypes,force:appHostable"
+                access="public"
+                >
+    <aura:attribute name="vfHost" type="String"
+                    default="aramas-dev-ed--c.na35.visual.force.com"/>
+
+    <aura:attribute name="message" type="String"/>
+
+    <ui:inputtext value="{!v.message}" label="Enter message:"/>
+    <lightning:button label="Send to VF" onclick="{!c.sendToVF}"/>
+
+
+    <iframe aura:id="vfFrame" src="{!'https://' + v.vfHost + '/apex/Test4_Vf_in_Lightning?param='}"></iframe>
+</aura:component>

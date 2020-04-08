@@ -1,0 +1,48 @@
+<!--
+ - Created by mryzhkouskaya on 22.05.2019.
+ -->
+
+<aura:component description="MainCmpForTask"
+                controller="GetDataOffObjectsController"
+                implements="flexipage:availableForAllPageTypes,force:appHostable">
+
+    <aura:handler name="cmpEvent"
+                  event="c:EventSelectedObject"
+                  action="{!c.handleCmpObjectChoiceEvent}"/>
+    <aura:handler name="cmpChoiceFieldEvent"
+                  event="c:EventSelectedFields"
+                  action="{!c.handleCmpSelectedFieldsEvent}"/>
+
+    <aura:attribute name="attrObjectName" type="String"/>
+    <aura:attribute name="attrListFieldObjects" type="List"/>
+
+    <aura:attribute name="showSpinner" type="boolean"/>
+
+    <aura:if isTrue="{!v.showSpinner}">
+        <lightning:spinner aura:id="Spinner" alternativeText="Loading" size="medium" variant="brand" class="slds-hide"/>
+    </aura:if>
+
+    <lightning:layout multipleRows="true">
+
+        <lightning:layoutItem size="12"
+                              smallDeviceSize="12"
+                              mediumDeviceSize="12"
+                              largeDeviceSize="6"
+                              padding="around-large">
+            <c:Choice_Object/>
+        </lightning:layoutItem>
+
+
+        <lightning:layoutItem size="12"
+                              smallDeviceSize="12"
+                              mediumDeviceSize="12"
+                              largeDeviceSize="6">
+            <c:ChoiceField aura:id="compChoiceField"/>
+        </lightning:layoutItem>
+
+
+    </lightning:layout>
+
+    <c:TableWithSelectedFields aura:id="compTableWithSelectedFields"/>
+
+</aura:component>

@@ -1,0 +1,34 @@
+<!--
+ - Created by mryzhkouskaya on 19.11.2019.
+ -->
+
+<aura:component description="Test6_VF_In_Lightning" implements="force:appHostable,flexipage:availableForAllPageTypes"
+                access="public">
+
+    <aura:attribute name="message" type="String" access="public"/>
+    <aura:attribute name="visualforceDomain" type="String"
+                    default="aramas-dev-ed--c.visualforce.com" access="public"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <lightning:card title="Post Message Demo">
+        <br/>
+
+        <div style="width:60%;height:700px; background-color: cadetblue">
+            <div>I am Lightning cmp with Visualforce Page inside me</div>
+            <br/>
+            <lightning:input type="text" label="Message:" value="{!v.message}" class="lightning-input"
+                             variant="label-hidden" name="Message" placeholder="Type your messsage here..."/>
+            <lightning:button label="Send to VF" onclick="{!c.sendToVF}"/>
+            <span id="allMessages"></span>
+
+            <br/>
+            <br/>
+            <br/>
+            <lightning:card title="I am a Visualforce Page inside Lightning Component" class="vf-card">
+                <br/>
+                <iframe aura:id="vfFrame" frameborder="0" width="100%" height="400px"
+                        src="{!'https://' + v.visualforceDomain + '/apex/Test6_VF_in_Lightning'}"></iframe>
+            </lightning:card>
+        </div>
+    </lightning:card>
+</aura:component>

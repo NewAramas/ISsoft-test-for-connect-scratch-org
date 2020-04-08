@@ -1,0 +1,25 @@
+<!--
+ - Created by mryzhkouskaya on 28.05.2019.
+ -->
+
+<aura:component description="LightningCell_Header" controller="GetDataOffObjectsController">
+    <aura:attribute name="rowData" type="List"/>
+    <aura:attribute name="colName" type="String"/>
+    <aura:attribute name="colLabel" type="String"/>
+    <aura:attribute name="sortAsc" type="String"/>
+
+    <th aria-label="{!v.colName}" aria-sort="none" class="slds-is-sortable slds-is-resizable slds-text-title_caps"
+        scope="col">
+        <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="-1">
+                        <span class="width_100" title="{!v.colName}" id="{!v.colName}" onclick="{!c.sortByAbex}">
+                            {!v.colLabel}
+                            <aura:if isTrue="{!v.sortAsc}">
+                                &#8593;
+                                <aura:set attribute="else">
+                                    &#8595;
+                                </aura:set>
+                            </aura:if>
+                        </span>
+        </a>
+    </th>
+</aura:component>

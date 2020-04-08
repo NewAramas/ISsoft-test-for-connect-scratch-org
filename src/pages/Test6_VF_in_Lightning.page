@@ -1,0 +1,116 @@
+<!--
+ - Created by mryzhkouskaya on 19.11.2019.
+ -->
+
+<apex:page id="Test6_VF_in_Lightning" lightningStylesheets="true" controller="Test4_for_VFpage_Controller">
+    <html>
+    <head>
+        <style>
+            .vf-header {
+                padding-left: 20px;
+                background-color: lightgrey;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                font-weight: bold;
+            }
+
+            .vf-input-element {
+                margin-left: 20px;
+            }
+        </style>
+    </head>
+    <body >
+    <apex:form style="width:60%; height:300px; background-color: aqua" id="form">
+        <div class="vf-header">Send Message To Lightning</div>
+        <br/>
+        <p>
+            <input class="vf-input-element" type="text" label="My Message" id="visualforceMessage"/>
+            <input class="vf-input-element" type="submit" value="Send Message To Lightning"
+                   name="Send Message To Lightning" id="sendButton"/>
+        </p>
+
+        <div class="vf-header">Read All Messages From Lightning Component</div>
+        <p style="padding-left:20px"><span id="allMessages"></span></p>
+
+        <div class="vf-header">Redirection to another page </div>
+         <br/>
+
+        <!--<apex:commandButton action="{!doRedirectToAnotherPage}" value="Do Redirect" reRender="form">-->
+            <!--<apex:param value="99" name="inpval" assignTo="{!RecordToDelete}"/>-->
+        <!--</apex:commandButton>-->
+
+        <apex:commandLink action="{!doRedirectToAnotherPage}" value="Do Redirect2" id="theCommandLink" >
+            <apex:param name="personID" value="33" />
+        </apex:commandLink>
+
+        <apex:commandButton action="{!doRedirectToAnotherPage}" value="Do Redirect3" reRender="form" id="theButton">
+            <apex:param assignTo="{!RecordToDelete}" value="44" name="setParam" id="paramToAnotherPage"/>
+        </apex:commandButton>
+<div style="display:none;">
+        <apex:inputText value="{!inputText}" id="testText" />
+</div>
+        <!--<apex:actionFunction action="{!doRedirectToAnotherPage}" name="setParam" reRender="form">-->
+            <!--<apex:param name="RecordToDelete" value="" assignTo="{!QueryString}"/>-->
+        <!--</apex:actionFunction>-->
+
+        <!--<apex:actionFunction name="doStuff" action="{!setParamsTpApex}">-->
+            <!--<apex:param name="x" value="x" assignTo="{!somevariable}" />-->
+        <!--</apex:actionFunction>-->
+    </apex:form>
+
+
+    <script type="text/javascript">
+        /**
+         * Your org's my domain url
+         * Please include port as well if any
+         **/
+
+        var lightningDomain = "https://aramas-dev-ed.lightning.force.com";
+        console.log('in script');
+
+        /**
+         * Adding a new event listner on window object
+         * to listen for message event
+         **/
+        window.addEventListener("message", function (event) {
+            // var lexOrigin = "https://aramas-dev-ed.lightning.force.com";
+            console.log('in page listener');
+            //Check if origin is not your org's my domain url, in this case, simply return out of function
+            if (lightningDomain.indexOf(event.origin) === -1) {
+                // Reject message if origin domain is not as you are expecting
+                console.error('Discarding Message | Message received from invalid domain: ', event.origin);
+                return;
+            }
+            //  var eventDataFromLigtning = event.data;
+            // calAF(eventDataFromLigtning,eventDataFromLigtning );
+
+
+            console.log('Visualforce Gets: ', event.data);
+
+            document.querySelector('#allMessages').innerHTML += '<p>'+ event.data + '</p>';
+            <!--document.getElementById('{!$Component.form.theButton.paramToAnotherPage}').value ='Test value';-->
+            document.getElementById('{!$Component.form.testText}').value =event.data;
+
+                    // var myParam = 'abc';
+                    // doStuff(myParam);
+
+
+
+        }, false);
+
+        /**
+         * Adding event listener on send button
+         * to send message to lightning component
+         **/
+        document.querySelector('#sendButton').addEventListener("click", function (event) {
+            console.log('Visualforce Sends: ', document.querySelector('#visualforceMessage').value);
+
+            parent.postMessage(document.querySelector('#visualforceMessage').value, lightningDomain);
+            document.querySelector('#visualforceMessage').value = "";
+            event.preventDefault();
+        });
+
+    </script>
+    </body>
+    </html>
+</apex:page>

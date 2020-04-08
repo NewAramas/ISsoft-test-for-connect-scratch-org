@@ -1,0 +1,28 @@
+<!--
+ - Created by mryzhkouskaya on 19.07.2019.
+ -->
+
+<aura:component description="Ex2_DynamicPicklist" controller = "Ex2_D_Controller">
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:attribute name="childAttrFieldValues" type="Object" default=""/>
+
+    <aura:attribute name="selectedValue" type="String" />
+    <aura:attribute name="nameCurrentField" type="String" default=""/>
+    <aura:attribute name="currentDependentField" type="Integer" default="0"/>
+    <aura:attribute name="sObjectField" type="Object" />
+
+    <aura:attribute name="childAttrListFieldsWithDependency" type="List"  />
+    <aura:attribute name="inputDesc" type="List" default="[]" />
+
+    <aura:attribute name="theForm" type="Aura.Component[]"/>
+    <form class="slds-form--stacked">
+        <aura:iteration items="{!v.theForm}" var="facet">
+                {!facet}
+        </aura:iteration>
+    </form>
+
+
+    <aura:registerEvent name="ex2toEx5Event" type="c:Ex2ToEx5selectPicklistEvent"/>
+
+</aura:component>

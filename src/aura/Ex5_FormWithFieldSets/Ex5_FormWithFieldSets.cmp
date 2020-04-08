@@ -1,0 +1,58 @@
+<!--
+ - Created by mryzhkouskaya on 9.07.2019.
+ -->
+
+<aura:component controller="Ex5_GetFieldSets"
+                implements="flexipage:availableForAllPageTypes,force:appHostable,forceCommunity:availableForAllPageTypes"
+                description="Ex5_FormWithFieldSets" access="global">
+
+    <aura:attribute name="fieldSetName" type="String" description=""/>
+
+    <aura:attribute name="fieldSets" type="Object[]" access="private"/>
+    <aura:attribute name="sObjectInfo" type="Object" />
+
+    <aura:attribute name="listFieldSets" type="List" default="[]"/>
+    <aura:attribute name="showDependentPicklist" type="Boolean"/>
+    <aura:attribute name="listDependencyFields" type="List" default="[]"/>
+    <aura:attribute name="listFieldsWithDependency" type="Object[]"/>
+
+    <aura:attribute name="inputDesc_parentEx2" type="List" default="[]"/>
+
+    <aura:attribute name = "ObjectNameForApp" type="String" default="Contact"/>
+    <aura:attribute name = "FieldNameForApp" type = "String" default="null"/>
+    <aura:attribute name = "FieldSetNameForApp" type = "String" default="ex5_Contact_Field_Setting"/>
+    <aura:attribute name = "PositionForApp" type ="String" default="1 column"/>
+    <aura:attribute name = "email" type="String" default="new@gmail.com"/>
+
+    <aura:attribute name = "theForm" type="Aura.Component[]"/>
+
+    <aura:handler name = "init" value="{!this}" action="{!c.init}"/>
+    <aura:handler name = "ex3ToEx5SelectedLookupValuesEvent" event="c:Ex3_ChangeFieldValueEvent"
+                  action = "{!c.handleComponentEventFromEx3cmp}"/>
+    <aura:handler name = "ex2ToEx5SelectedValuesEvent" event="c:Ex2ToEx5selectPicklistEvent"
+                  action = "{!c.handleComponentEventFromEx2cmp}"/>
+
+    <fieldset class = "slds-box slds-theme--default ">
+        <form class = "slds-form--stacked">
+            <div class = "slds-grid slds-grid_vertical" aura:id="divForLayoutId">
+                <aura:iteration items="{!v.theForm}" var="facet">
+                    <div class = "slds-col slds-size_1-of-2">
+                        <div class = "slds-m-around_x-small">
+                                {!facet}
+                        </div>
+                    </div>
+                </aura:iteration>
+            </div>
+            <!--<lightning:button label="Save" onclick="{!c.saveForm}" class="slds-align_absolute-center"/>-->
+            <div class="slds-align_absolute-center">
+                <lightning:button label = "Save" onclick = "{!c.saveForm}" />
+                <lightning:button label = "Clear" onclick = "{!c.clearForm}"/>
+            </div>
+
+        </form>
+    </fieldset>
+
+</aura:component>
+
+
+<!--<aura:attribute name="sObjectInfo" type="Object[]" default="{ 'sobjectType': 'Contact' , 'LastName': ''}"/>-->

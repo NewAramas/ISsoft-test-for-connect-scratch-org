@@ -1,0 +1,54 @@
+<!--
+ - Created by mryzhkouskaya on 24.06.2019.
+ -->
+
+<aura:component description="Ex5_FormWithDynamicFieldSets" controller="Ex5_GetFieldSets"
+                implements="force:appHostable"
+                access="global" >
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    <aura:attribute name="theForm" type="Aura.Component[]" />
+    <aura:attribute name="subNutton" type="Aura.Component[]" />
+    <aura:attribute name = "showDependentPicklist" type="Boolean" />
+    <aura:attribute name="sObjectInfo" type="Contact" default="{ 'sobjectType': 'Contact' , 'LastName': ''}" />
+
+    <aura:attribute name = "listFieldSets" type="List" default="[]" />
+
+
+    <fieldset class="slds-box slds-theme--default ">
+    <form class="slds-form--stacked">
+
+        ///////////TEST///
+        <lightning:input aura:id="expenseform1" label="Expense Name1"
+
+                         name="expensename"
+                         required="true"/>
+
+        <lightning:input aura:id="expenseform2" label="Expense Name2"
+                         name="expensename"
+                         onError="{!c.handleError}"
+                         required="true"/>
+        <ui:inputNumber aura:id="number" label="Enter a number: "  onError="{!c.handleError}" required="true"/>
+        <ui:button label="Validate" press="{!c.handleValidate}"/>
+        ///////////////
+
+        <div class="slds-grid slds-wrap" style="padding-left: 110px;">
+
+        <aura:iteration items="{!v.theForm}" var="facet" >
+            <div class="slds-size_1-of-2">
+                <div class="slds-m-around_x-small">
+                        {!facet}
+                </div>
+            </div>
+        </aura:iteration>
+
+    </div>
+
+    <aura:if isTrue="{!v.showDependentPicklist}"  >
+        <c:Ex2_D childAttribute="{!v.sObjectInfo}"/>
+    </aura:if>
+
+   <div  class="slds-align_absolute-center">{!v.subNutton}</div>
+        </form>
+    </fieldset>
+</aura:component>

@@ -1,0 +1,8 @@
+<!--
+ - Created by mryzhkouskaya on 13.03.2020.
+ -->
+
+<aura:component description="test_for_test_attr_child1">
+    <aura:attribute name="subject" type="String"/>
+    <div>foo: {!v.subject}</div>
+</aura:component>

@@ -1,0 +1,24 @@
+<!--
+ - Created by mryzhkouskaya on 13.06.2019.
+ -->
+
+<aura:component description="TestComp"  implements="flexipage:availableForAllPageTypes,force:appHostable"
+                access="public">
+
+
+
+    <aura:attribute name="vfHost" type="String"
+                    default="aramas-dev-ed--c.na35.visual.force.com"/>
+
+    <iframe aura:id="vfFrame" frameborder="0" width="100%" height="400px"
+            src="{!'https://' + v.vfHost + '/apex/test_p5_JS?param='}"></iframe>
+
+    <!--<ltng:require scripts="{!$Resource.ChartJS293}" afterScriptsLoaded="{!c.afterScriptsJSLoaded}" />-->
+    <!--<div class="slds-grid">-->
+        <!--<div id = "colors" style="height: 400px; width:30%" class = "slds-p-around_medium">-->
+            <!--<canvas id="bar-chart"></canvas>-->
+        <!--</div>-->
+    <!--</div>-->
+
+
+</aura:component>

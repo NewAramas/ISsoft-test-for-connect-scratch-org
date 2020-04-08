@@ -1,0 +1,9 @@
+<!--
+ - Created by mryzhkouskaya on 15.07.2019.
+ -->
+
+<aura:event type="COMPONENT" description="Ex3_ChangeFieldValueEvent">
+    
+    <aura:attribute name="selectID" type="String" default="" />
+    <aura:attribute name="fieldNameOfToSetObject" type="String" default="" />
+</aura:event>

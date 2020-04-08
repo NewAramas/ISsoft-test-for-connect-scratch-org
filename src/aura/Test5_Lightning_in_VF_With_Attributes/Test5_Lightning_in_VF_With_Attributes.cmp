@@ -1,0 +1,14 @@
+<!--
+ - Created by mryzhkouskaya on 16.11.2019.
+ -->
+
+<aura:component description="Test5_Lightning_in_VF_With_Attributes">
+
+    <!--<aura:attribute name="attrib1" type="String" default="111 11 1"  />-->
+    <!--<aura:attribute name="attrib2" type="String" default="222 22 2" />-->
+
+    <aura:attribute name="messageFromEvent" type="String"/>
+    <p> start In child attrib</p>
+    <p>{!v.messageFromEvent}</p>
+    <p>end In child attrib</p>
+</aura:component>

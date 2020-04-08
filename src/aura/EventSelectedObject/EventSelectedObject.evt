@@ -1,0 +1,7 @@
+<!--
+ - Created by mryzhkouskaya on 10.06.2019.
+ -->
+
+<aura:event type="COMPONENT" description="EventSelectedObject">
+    <aura:attribute name="objectName" type="String"/>
+</aura:event>

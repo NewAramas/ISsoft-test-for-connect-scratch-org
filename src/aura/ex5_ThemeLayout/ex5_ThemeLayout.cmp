@@ -1,0 +1,29 @@
+<!--
+ - Created by mryzhkouskaya on 19.09.2019.
+ -->
+
+<aura:component  implements="forceCommunity:themeLayout">
+    <!--<aura:attribute name="search" type="Aura.Component[]"/>-->
+    <!--<aura:attribute name="sidebarFooter" type="Aura.Component[]"/>-->
+    <!--<div class="slds-grid slds-grid&#45;&#45;align-center">-->
+        <!--<div class="slds-col">-->
+            <!--<div class="slds-grid slds-grid&#45;&#45;vertical">-->
+                <!--<div class="slds-col">-->
+                    <!--&lt;!&ndash; placeholder for logo &ndash;&gt;-->
+                <!--</div>-->
+                <!--<div class="slds-col">-->
+                    <!--{!v.search}-->
+                <!--</div>-->
+                <!--<div class="slds-col">-->
+                    <!--&lt;!&ndash; placeholder for navigation &ndash;&gt;-->
+                <!--</div>-->
+                <!--<div class="slds-col">-->
+                        <!--{!v.sidebarFooter}-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="slds-col content">-->
+                <!--{!v.body}-->
+        <!--</div>-->
+    <!--</div>-->
+</aura:component>

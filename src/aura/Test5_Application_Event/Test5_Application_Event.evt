@@ -1,0 +1,7 @@
+<!--
+ - Created by mryzhkouskaya on 16.11.2019.
+ -->
+
+<aura:event type="APPLICATION" description="Test5_Application_Event">
+    <aura:attribute name="message" type="String"/>
+</aura:event>

@@ -1,0 +1,45 @@
+<!--
+ - Created by mryzhkouskaya on 16.11.2019.
+ -->
+
+<apex:page id="Test5_Lightning_in_VF" docType="html-5.0" standardStylesheets="false" lightningStylesheets="true">
+
+
+    <apex:slds />
+        <apex:includeLightning />
+    <style>
+        .vf-header {
+            padding-left: 20px;
+            background-color: lightgrey;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            font-weight: bold;
+            width:49%;
+
+        }
+    </style>
+
+
+    <!--<div class="slds-scope">-->
+        <div class="vf-header">Visualforce page </div>
+        <div style="background-color: darkblue; width:50%; color: bisque;">
+            <br/>
+            <p>Hello I am visualforce page</p>
+
+            <div id="lightning"  align="center" style="width:60%;height:600px; background-color: aqua"></div>
+        </div>
+        <script type="text/javascript">
+            $Lightning.use("c:Test5_Lightning_In_VF_APP", function() {
+                $Lightning.createComponent("c:Test5_Container_Componenta",
+                        {
+                            "messageFromEvent" : "TTTTTTTTTTTTTTTTTTTTTTTT"
+                        },
+                        "lightning",
+                        function(cmp) {
+                        });
+            });
+        </script>
+    <!--</div>-->
+
+
+    </apex:page>

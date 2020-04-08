@@ -1,0 +1,11 @@
+<!--
+ - Created by mryzhkouskaya on 16.11.2019.
+ -->
+
+<aura:component description="Test5_Container_Componenta"
+                implements="flexipage:availableForAllPageTypes,force:appHostable" access="public">
+
+    <c:Test5_Lightning_in_VF_With_Event />
+    <c:Test5_Lightning_in_VF />
+
+</aura:component>
